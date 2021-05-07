@@ -12,6 +12,7 @@
     <meta charset="utf-8">
     <title>Ticket Details</title>
     <link rel = "stylesheet" type = "text/css" href="ticketsDetails.css">
+    <script src="ticketsDetails.js" defer> </script>
   </head>
   <body>
   
@@ -63,7 +64,11 @@
       
     </div>
 
-    <div id="container-rca" class="container-rca">
+    <div id="container-solve" class="container-rca">
+      <button id="solve-button"> Solve </button>
+    </div>
+
+    <div id="container-rca" class="container-rca" style="display:none">
       <textarea rows="4" cols="150" style="resize: none"> </textarea> 
       <button> Done </button>
     </div>

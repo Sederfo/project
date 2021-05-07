@@ -72,10 +72,16 @@
       document.addEventListener("DOMContentLoaded", () => {
       const rows = document.querySelectorAll("tr[data-href]");
       rows.forEach(row => {
-        row.addEventListener("click", () => {
+        if (row.children[5].textContent == "pending"){
+          row.addEventListener("click", () => {
             var ticketId = row.children[0].textContent;
             window.location.href =  row.dataset.href + "?id=" + ticketId;
         });
+        }
+        else {
+          row.style.color = "green";
+        }
+        
       });
     });
     </script>
