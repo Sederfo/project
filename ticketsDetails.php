@@ -15,7 +15,7 @@
     <script src="ticketsDetails.js" defer> </script>
   </head>
   <body>
-  
+
     <div class = "sidenav">
       <div class = "opts">
         <a href = "homeAdmin.php">Tickets</a>
@@ -32,8 +32,8 @@
       $_SESSION["currentTicketId"] = $_GET["id"];
       $currentTicketId = $_SESSION["currentTicketId"];
       $currentTicket = array();
-      $stmt = $conn->prepare("select `id`, `date`, `from`, `subject`, `description`, `priority`, `status`,
-        `RCA` from project.tickets where id = ?");
+      $stmt = $conn->prepare("select `id`, `date`, `from`, `subject`, `description`, `priority`, `status`
+       from project.tickets where id = ?");
 
       $stmt->bind_param("i", $currentTicketId);
 
@@ -43,7 +43,7 @@
 
       if($stmt->num_rows === 1){
         $stmt->bind_result($currentTicket["id"], $currentTicket["date"], $currentTicket["from"], $currentTicket["subject"],
-        $currentTicket["description"], $currentTicket["priority"], $currentTicket["status"], $currentTicket["RCA"]);
+        $currentTicket["description"], $currentTicket["priority"], $currentTicket["status"]);
         $stmt->fetch();
       }
     }
@@ -61,7 +61,7 @@
 
     <div id="container-description" class="container-description">
       <p><?php echo $currentTicket["description"];?> </p>
-      
+
     </div>
 
     <div id="container-solve" class="container-rca">
@@ -69,23 +69,23 @@
     </div>
 
     <div id="container-rca" class="container-rca" style="display:none">
-      <textarea rows="4" cols="150" style="resize: none"> </textarea> 
+      <textarea rows="4" cols="150" style="resize: none"> </textarea>
       <button> Done </button>
     </div>
 
-    
-  </div>
-    
 
-  
-    
-     
+  </div>
+
+
+
+
+
 
   </body>
 
- 
 
-    
+
+
 </html>
 
 <?php
