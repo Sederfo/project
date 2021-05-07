@@ -42,7 +42,7 @@
 
         if(!$sql){
           echo "asdasdA"; }
-          
+
         $sql->execute();
         $res = $sql->get_result();
 
@@ -81,7 +81,6 @@
         else {
           row.style.color = "green";
         }
-        
       });
     });
     </script>
