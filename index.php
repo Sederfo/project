@@ -9,7 +9,6 @@
     <div class = "logInForm">
     <form action = "login.php" method="post">
 
-
       <?php
         if(isset($_GET['error'])){
       ?>

@@ -65,7 +65,8 @@
     </div>
 
     <div id="container-solve" class="container-rca">
-      <button id="solve-button"> Solve </button>
+        <button type = "submit" id="solve-button" name = "solveButton"> Solve </button>
+        <!--<input type = "button" name = "solveButton" value="Solve" id = "solve-button">-->
     </div>
 
     <div id="container-rca" class="container-rca" style="display:none">
@@ -73,19 +74,19 @@
       <button> Done </button>
     </div>
 
-
   </div>
+  <?php
 
+    if(isset($_POST["solveButton"])){
+      $status = "in progress";
+      updateStatus($currentTicket["id"], $status);
+      $header = "localhost/project/ticketsDetails.php?id=" . $currentTicket["id"];
+    }
 
-
-
+   ?>
 
 
   </body>
-
-
-
-
 </html>
 
 <?php
