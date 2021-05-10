@@ -24,8 +24,8 @@ session_status() === PHP_SESSION_ACTIVE ?: session_start();
     values(?, ?, ?, ?, ?, ?);");
     $date = date('Y-m-d H:i:s');
     $status = "pending";
-    $insertQuery->bind_param("ssssss", $_SESSION["user_name"], $date, $subject, $description, $priority, $priority);
-    $insertQuer->execute();
+    $insertQuery->bind_param("ssssss", $_SESSION["user_name"], $date, $subject, $description, $priority, $status);
+    $insertQuery->execute();
     $insertQuery->close();
   }
  ?>

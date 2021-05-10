@@ -2,13 +2,10 @@
   session_start();
   include "db_conn.php";
   require "utilities.php";
+  error_reporting(E_ALL);
+  ini_set('display_errors', 1);
   if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role'])){
-    if(isset($_POST["subject"]) && isset($_POST["description"]) && isset($_POST["priority"])){
-      $subject = $_POST["subject"];
-      $description = $_POST["description"];
-      $priority = $_POST["priority"];
-      addTicket($subject, $description, $priority);
-    }
+
  ?>
 
 <!DOCTYPE html>
@@ -56,42 +53,36 @@
         }else{
           echo "No tickets";
         }
-
-
        ?>
     </table>
 
-    <form method = "post" id ="addTIcketForm">
-    </form>
-
     <button class ="modal-btn">Add Ticket</button>
 
-    <div class = "modal-bg">
-      <div class = "modal">
-        <label for="Subject">Subject: </label>
-        <input type = "text" name = "sbj" form = "addTIcketForm" id = "sbj">
-        <label for ="Description">Description</label>
-        <textarea id = "dsc" name = "dsc"></textarea>
-        <label for ="Priority">Priority</label>
-        <select name = "priority" id = "priority" form = "addTIcketForm">
-          <option value ="low" id = "lowpr">Low</option>
-          <option value ="medium" id = "mediumpr">Medium</option>
-          <option value ="high" id = "highpr">High</option>
-          <option value ="critical" id = "criticalpr">Critical</option>
-        </select>
-        <button type = "submit" class = "doneBtn" name = "doneBtn">Done</button>
-        <span class ="modal-close">X</span>
+    <form action = "" method = "post" id ="addTicketForm">
+      <div class = "modal-bg">
+        <div class = "modal">
+          <label for="Subject">Subject: </label>
+          <input type = "text" name = "subject" form = "addTicketForm" id = "sbj" required>
+          <label for ="Description">Description</label>
+          <textarea id = "dsc" name = "description" required></textarea>
+          <label for ="Priority">Priority</label>
+          <select name = "priority" id = "priority" form = "addTicketForm" required>
+            <option value ="low" id = "lowpr">Low</option>
+            <option value ="medium" id = "mediumpr">Medium</option>
+            <option value ="high" id = "highpr">High</option>
+            <option value ="critical" id = "criticalpr">Critical</option>
+          </select>
+          <input type = "submit" class = "doneBtn" name = "doneBtn" value = "Done">
+          <span class ="modal-close">X</span>
+        </div>
       </div>
-    </div>
-
+    </form>
     <script>
 
     var modalBtn = document.querySelector('.modal-btn');
     var modalBg = document.querySelector('.modal-bg');
     var modalClose = document.querySelector('.modal-close');
     var modalDone = document.querySelector('.doneBtn');
-
-
 
     modalBtn.addEventListener('click', () => {
       modalBg.classList.add('bg-active');
@@ -101,7 +92,8 @@
       modalBg.classList.remove('bg-active');
     });
 
-    modalDone.addEventListener('click', () =>{
+    modalDone.addEventListener('submit', (e) =>{
+      e.preventDefault();
       var subject = document.getElementById('sbj').value;
       var description = document.getElementById('dsc').value;
       var priority = document.getElementById('priority').value;
@@ -110,16 +102,8 @@
       console.log("description: " + description);
       console.log("priority: " + priority);
 
-      $.ajax({
-        type: "post",
-        data: {subject: subject, description: description, priority: priority},
-        success: function(data){
-          console.log("success");
-        }
-      });
-
       modalBg.classList.remove('bg-active');
-
+      window.location.reload();
     });
 
 
@@ -138,12 +122,18 @@
       });
     });
     </script>
-    <?php
 
-     ?>
   </body>
 </html>
-
+<?php
+if(isset($_POST["doneBtn"])) {
+  $subject = $_POST["subject"];
+  $description = $_POST["description"];
+  $priority = $_POST["priority"];
+  addTicket($subject, $description, $priority);
+  exit;
+}
+ ?>
 <?php
 }else{
   header("Location: index.php");
