@@ -5,7 +5,14 @@
   error_reporting(E_ALL);
   ini_set('display_errors', 1);
   if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role'])){
-
+    if(isset($_POST["doneBtn"])) {
+      $subject = $_POST["subject"];
+      $description = $_POST["description"];
+      $priority = $_POST["priority"];
+      addTicket($subject, $description, $priority);
+      header("Location: homeAdmin.php");
+      exit;
+    }
  ?>
 
 <!DOCTYPE html>
@@ -67,6 +74,7 @@
           <textarea id = "dsc" name = "description" required></textarea>
           <label for ="Priority">Priority</label>
           <select name = "priority" id = "priority" form = "addTicketForm" required>
+            <option value ="" disabled selected>Select priority</option>
             <option value ="low" id = "lowpr">Low</option>
             <option value ="medium" id = "mediumpr">Medium</option>
             <option value ="high" id = "highpr">High</option>
@@ -98,14 +106,9 @@
       var description = document.getElementById('dsc').value;
       var priority = document.getElementById('priority').value;
 
-      console.log("subject: " + subject);
-      console.log("description: " + description);
-      console.log("priority: " + priority);
-
       modalBg.classList.remove('bg-active');
       window.location.reload();
     });
-
 
       document.addEventListener("DOMContentLoaded", () => {
       const rows = document.querySelectorAll("tr[data-href]");
@@ -125,15 +128,7 @@
 
   </body>
 </html>
-<?php
-if(isset($_POST["doneBtn"])) {
-  $subject = $_POST["subject"];
-  $description = $_POST["description"];
-  $priority = $_POST["priority"];
-  addTicket($subject, $description, $priority);
-  exit;
-}
- ?>
+
 <?php
 }else{
   header("Location: index.php");

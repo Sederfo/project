@@ -24,8 +24,6 @@
       </div>
     </div>
 
-
-
     <?php
 
     if(isset($_GET["id"])){
@@ -63,12 +61,12 @@
       <p><?php echo $currentTicket["description"];?> </p>
 
     </div>
-
+    <form action = "" method = "post">
     <div id="container-solve" class="container-rca">
-        <button type = "submit" id="solve-button" name = "solveButton"> Solve </button>
-        <!--<input type = "button" name = "solveButton" value="Solve" id = "solve-button">-->
+        <!--<button type = "submit" id="solve-button" name = "solveButton"> Solve </button>-->
+        <input type = "submit" name = "solveButton" value="Solve" id = "solve-button">
     </div>
-
+    </form>
     <div id="container-rca" class="container-rca" style="display:none">
       <textarea rows="4" cols="150" style="resize: none"> </textarea>
       <button> Done </button>
@@ -77,11 +75,11 @@
   </div>
   <?php
 
-    if(isset($_POST["solveButton"])){
-      $status = "in progress";
-      updateStatus($currentTicket["id"], $status);
-      $header = "localhost/project/ticketsDetails.php?id=" . $currentTicket["id"];
-    }
+  if(isset($_POST["solveButton"])){
+    $status = "in progress";
+    updateStatus($currentTicket["id"], $status);
+    header("Location: ticketsDetails/php?id=" . $currentTicket["id"]);
+  }
 
    ?>
 
