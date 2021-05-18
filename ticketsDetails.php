@@ -4,6 +4,17 @@
   include "utilities.php";
   if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role'])){
 
+    if(isset($_POST["done"]) && isset($_POST["ticketPriority"])){
+      $prt = $_POST["ticketPriority"];
+
+      if($prt === "in progress"){
+        
+      }else if($prt === "solved"){
+        header("Location: homeAdmin.php");
+        exit;
+      }
+
+    }
  ?>
 
 <!DOCTYPE html>
@@ -19,7 +30,7 @@
     <div class = "sidenav">
       <div class = "opts">
         <a href = "homeAdmin.php">Tickets</a>
-        <a href = "#">Profile</a>
+        <a id = "add-account">Add Account</a>
         <a href = "logout.php">Log out</a>
       </div>
     </div>
@@ -59,26 +70,33 @@
 
     <div id="container-description" class="container-description">
       <p><?php echo $currentTicket["description"];?> </p>
-
     </div>
+
     <form action = "" method = "post">
     <div id="container-solve" class="container-rca">
         <!--<button type = "submit" id="solve-button" name = "solveButton"> Solve </button>-->
-        <input type = "submit" name = "solveButton" value="Solve" id = "solve-button">
+
+        <select name = "ticketPriority" id = "priority">
+          <option value = "pending" selected disabled>Choose status</option>
+          <option value = "in progress" id = "in progress">In progress</option>
+          <option value = "solved" id = "solved">Solved</option>
+        </select>
+        <input type = "submit" name = "done" value="Done" id = "done-button">
     </div>
     </form>
+
     <div id="container-rca" class="container-rca" style="display:none">
       <textarea rows="4" cols="150" style="resize: none"> </textarea>
       <button> Done </button>
     </div>
-
   </div>
+
+
   <?php
 
   if(isset($_POST["solveButton"])){
     $status = "in progress";
-    updateStatus($currentTicket["id"], $status);
-    header("Location: ticketsDetails/php?id=" . $currentTicket["id"]);
+    //updateStatus($currentTicket["id"], $status);
   }
 
    ?>
