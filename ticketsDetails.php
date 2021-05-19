@@ -8,7 +8,7 @@
       $prt = $_POST["ticketPriority"];
 
       if($prt === "in progress"){
-        
+
       }else if($prt === "solved"){
         header("Location: homeAdmin.php");
         exit;
@@ -38,8 +38,9 @@
     <?php
 
     if(isset($_GET["id"])){
-      $_SESSION["currentTicketId"] = $_GET["id"];
-      $currentTicketId = $_SESSION["currentTicketId"];
+      // $_SESSION["currentTicketId"] = $_GET["id"];
+      // $currentTicketId = $_SESSION["currentTicketId"];
+      $currentTicketId = $_GET["id"];
       $currentTicket = array();
       $stmt = $conn->prepare("select `id`, `date`, `from`, `subject`, `description`, `priority`, `status`
        from project.tickets where id = ?");

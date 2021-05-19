@@ -58,7 +58,6 @@
         <th>Status</th>
       </tr>
       <?php
-        $index = 1;
         $sql = $conn->prepare("select `id`, `date`, `from`, `subject`, `description`, `priority`, `status` from
         project.tickets order by `date` desc");
 
@@ -69,12 +68,10 @@
           $data = $res->fetch_all(MYSQLI_ASSOC);
           $_SESSION["tickets"] = $data;
           foreach($data as $row){
-            echo "<tr class = 'table-row' data-href = '/project/ticketsDetails.php' id ='currentRow'><td>" . $index . "</td><td>" . $row["date"] . "</td><td>" . $row["from"] .
+            echo "<tr class = 'table-row' data-href = '/project/ticketsDetails.php' id ='currentRow'><td>" . $row["id"] . "</td><td>" . $row["date"] . "</td><td>" . $row["from"] .
               "</td><td>" . $row["subject"] . "</td><td>"  . $row["priority"] . "</td><td>" . $row["status"] . "</td></tr>";
-              $index++;
+
           }
-        }else{
-          echo "No tickets";
         }
        ?>
     </table>
@@ -84,7 +81,7 @@
     <form action = "" method = "post" id ="addTicketForm">
       <div class = "modal-bg">
         <div class = "modal">
-          <label for="Subject">Subject: </label>
+          <label for="Subject">Subject</label>
           <input type = "text" name = "subject" form = "addTicketForm" id = "sbj" required>
           <label for ="Description">Description</label>
           <textarea id = "dsc" name = "description" required></textarea>
@@ -170,6 +167,7 @@
       rows.forEach(row => {
         row.addEventListener("click", () => {
           var ticketId = row.children[0].textContent;
+          console.log(ticketId);
           window.location.href =  row.dataset.href + "?id=" + ticketId;
       });
       switch (row.children[5].textContent) {
