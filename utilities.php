@@ -45,8 +45,21 @@ session_status() === PHP_SESSION_ACTIVE ?: session_start();
     $checkQuery = $conn->prepare("select user_name from project.users where user_name = ?;");
     $checkQuery->bind_param("s", $username);
     $checkQuery->execute();
-    $result = $checkQuery->get_result();
+    $checkQuery->store_result();
+    $result = $checkQuery->num_rows;
     $checkQuery->close();
-    return $result;
+    if($result === 1){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  function deleteTicket($id){
+    include 'db_conn.php';
+    $deleteQuery = $conn->prepare("delete from project.tickets where id = ?;");
+    $deleteQuery->bind_param("i", $id);
+    $deleteQuery->execute();
+    $deleteQuery->close();
   }
  ?>

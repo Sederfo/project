@@ -3,17 +3,22 @@
   include "db_conn.php";
   include "utilities.php";
   if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role'])){
-
+    $assignedTo = "-";
     if(isset($_POST["done"]) && isset($_POST["ticketPriority"])){
       $prt = $_POST["ticketPriority"];
 
       if($prt === "in progress"){
-
+          $assignedTo = $_SESSION["user_name"];
       }else if($prt === "solved"){
-        header("Location: homeAdmin.php");
-        exit;
+
       }
 
+    }
+
+    if(isset($_POST["deleteButton"])){
+      echo "<script>confirm('Delete ticket?');
+      window.location = 'homeAdmin.php';</script>";
+      deleteTicket($_GET["id"]);
     }
  ?>
 
@@ -56,6 +61,7 @@
         $currentTicket["description"], $currentTicket["priority"], $currentTicket["status"]);
         $stmt->fetch();
       }
+
     }
      ?>
 
@@ -67,6 +73,7 @@
       <p>Date: <?php echo $currentTicket["date"];?></p>
       <p>Status: <?php echo $currentTicket["status"];?></p>
       <p>Priority: <?php echo $currentTicket["priority"];?></p>
+      <p>Assigned to: <?php echo $assignedTo?></p>
     </div>
 
     <div id="container-description" class="container-description">
@@ -90,17 +97,12 @@
       <textarea rows="4" cols="150" style="resize: none"> </textarea>
       <button> Done </button>
     </div>
+  <form action = "" method = "post">
+    <div class ="delete-button">
+      <input type = "submit" name = "deleteButton" value = "Delete">
+    </div>
+  </form>
   </div>
-
-
-  <?php
-
-  if(isset($_POST["solveButton"])){
-    $status = "in progress";
-    //updateStatus($currentTicket["id"], $status);
-  }
-
-   ?>
 
 
   </body>

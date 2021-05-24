@@ -18,10 +18,10 @@
       $username = $_POST["username"];
       $name = $_POST["name"];
       $role = $_POST["role"];
-      if(checkIfUserExists($username) === $username){
-        echo '<script>console.log("plm");</script>';
+      if(checkIfUserExists($username) === true){
+        //add notification "user exists" and display the modal until the admin inputs a valid username
       }else{
-        echo '<script>console.log("bag pl");</script>';
+        //add notification "account has been added"
         addAccount($username, $name, $role);
         header("Location: homeAdmin.php");
         exit;
@@ -116,7 +116,9 @@
         </div>
       </div>
     </form>
+    <div class = "notification">
 
+    </div>
     <script>
 
     // variables for add ticket modal
