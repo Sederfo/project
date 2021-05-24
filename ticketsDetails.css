@@ -94,3 +94,11 @@ h1 {
 .container-rca button {
   height: 15%;
 }
+
+.rca-hidden{
+  display: none;
+}
+
+.rca-visible{
+  display: block;
+}

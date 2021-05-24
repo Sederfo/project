@@ -3,17 +3,26 @@
   include "db_conn.php";
   include "utilities.php";
   if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role'])){
-    $assignedTo = "-";
+
     if(isset($_POST["done"]) && isset($_POST["ticketPriority"])){
       $prt = $_POST["ticketPriority"];
 
       if($prt === "in progress"){
-          $assignedTo = $_SESSION["user_name"];
+          updateAssignedTo($_GET["id"], $_SESSION["user_name"]);
+          updateStatus($_GET["id"], "in progress");
       }else if($prt === "solved"){
-
+          //addSolvedTicket($_GET["id"],$_SESSION['user_name'], $_POST["rca"]);
+          updateStatus($_GET["id"], "solved");
       }
-
     }
+
+    if(isset($_POST["rca"]) && isset($_POST["done"]) && !empty($_POST["rca"])){
+        addSolvedTicket($_GET["id"], $_SESSION['user_name'], $_POST["rca"]);
+        header("Location: homeAdmin.php");
+        exit;
+    }
+
+    $rca = getRCA($_GET["id"]);
 
     if(isset($_POST["deleteButton"])){
       echo "<script>confirm('Delete ticket?');
@@ -47,7 +56,7 @@
       // $currentTicketId = $_SESSION["currentTicketId"];
       $currentTicketId = $_GET["id"];
       $currentTicket = array();
-      $stmt = $conn->prepare("select `id`, `date`, `from`, `subject`, `description`, `priority`, `status`
+      $stmt = $conn->prepare("select `id`, `date`, `from`, `subject`, `description`, `priority`, `status`, `assignedTo`
        from project.tickets where id = ?");
 
       $stmt->bind_param("i", $currentTicketId);
@@ -58,7 +67,7 @@
 
       if($stmt->num_rows === 1){
         $stmt->bind_result($currentTicket["id"], $currentTicket["date"], $currentTicket["from"], $currentTicket["subject"],
-        $currentTicket["description"], $currentTicket["priority"], $currentTicket["status"]);
+        $currentTicket["description"], $currentTicket["priority"], $currentTicket["status"], $currentTicket["assignedTo"]);
         $stmt->fetch();
       }
 
@@ -73,7 +82,7 @@
       <p>Date: <?php echo $currentTicket["date"];?></p>
       <p>Status: <?php echo $currentTicket["status"];?></p>
       <p>Priority: <?php echo $currentTicket["priority"];?></p>
-      <p>Assigned to: <?php echo $assignedTo?></p>
+      <p>Assigned to: <?php echo $currentTicket["assignedTo"];?></p>
     </div>
 
     <div id="container-description" class="container-description">
@@ -84,12 +93,21 @@
     <div id="container-solve" class="container-rca">
         <!--<button type = "submit" id="solve-button" name = "solveButton"> Solve </button>-->
 
-        <select name = "ticketPriority" id = "priority">
+        <select name = "ticketPriority" id = "priority" class = "<?php echo $prt === "solved" || $currentTicket["status"] === "solved" ?  "rca-hidden" :  "rca-visible"; ?>">
           <option value = "pending" selected disabled>Choose status</option>
           <option value = "in progress" id = "in progress">In progress</option>
           <option value = "solved" id = "solved">Solved</option>
         </select>
+        <?php
+        if(count($rca) == 0){
+        ?>
+        <textarea rows="4" cols="150" name = "rca" style="resize: none" class = "<?php echo $prt === "solved" || $currentTicket["status"] === "solved" ?  "rca-visible":  "rca-hidden"; ?>"></textarea>
         <input type = "submit" name = "done" value="Done" id = "done-button">
+      <?php
+     }else {
+        ?>
+        <p><?php echo $rca[0]["RCA"];?></p>
+        <?php }?>
     </div>
     </form>
 
@@ -97,6 +115,7 @@
       <textarea rows="4" cols="150" style="resize: none"> </textarea>
       <button> Done </button>
     </div>
+
   <form action = "" method = "post">
     <div class ="delete-button">
       <input type = "submit" name = "deleteButton" value = "Delete">

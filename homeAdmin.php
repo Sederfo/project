@@ -56,9 +56,10 @@
         <th>Subject</th>
         <th>Priority</th>
         <th>Status</th>
+        <th>SLA</th>
       </tr>
       <?php
-        $sql = $conn->prepare("select `id`, `date`, `from`, `subject`, `description`, `priority`, `status` from
+        $sql = $conn->prepare("select `id`, `date`, `from`, `subject`, `description`, `priority`, `status`, `SLA` from
         project.tickets order by `date` desc");
 
         $sql->execute();
@@ -69,7 +70,7 @@
           $_SESSION["tickets"] = $data;
           foreach($data as $row){
             echo "<tr class = 'table-row' data-href = '/project/ticketsDetails.php' id ='currentRow'><td>" . $row["id"] . "</td><td>" . $row["date"] . "</td><td>" . $row["from"] .
-              "</td><td>" . $row["subject"] . "</td><td>"  . $row["priority"] . "</td><td>" . $row["status"] . "</td></tr>";
+              "</td><td>" . $row["subject"] . "</td><td>"  . $row["priority"] . "</td><td>" . $row["status"] . "</td><td>" . $row["SLA"] . "</td></tr>";
 
           }
         }
