@@ -40,6 +40,7 @@
     <link rel = "stylesheet" type = "text/css" href="css/modal.css">
     <link rel = "stylesheet" type = "text/css" href="css/topnav.css">
     <link rel = "stylesheet" type = "text/css" href="css/page.css">
+    <link rel="icon" href="img/tm_logo.png">
 
     <script defer src="js/ticketsDetails.js" defer> </script>
   </head>

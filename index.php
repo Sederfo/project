@@ -10,6 +10,8 @@
     <title>Login</title>
     <link rel = "stylesheet" type = "text/css" href="css/login.css">
     <link rel = "stylesheet" type = "text/css" href="css/page.css">
+    <link rel="icon" href="img/tm_logo.png">
+    
   </head>
   <body style="background:black">
     <div class = "logInForm">
