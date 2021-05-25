@@ -36,7 +36,7 @@
   <head>
     <meta charset="utf-8">
     <title>Ticket Details</title>
-    <link rel = "stylesheet" type = "text/css" href="ticketsDetails.css">
+    <link rel = "stylesheet" type = "text/css" href="css/ticketsDetails.css">
     <script src="ticketsDetails.js" defer> </script>
   </head>
   <body>

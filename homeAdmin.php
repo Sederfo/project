@@ -27,6 +27,10 @@
         exit;
       }
     }
+  }else{
+    header("Location: index.php");
+    exit();
+  }
  ?>
 
 <!DOCTYPE html>
@@ -36,12 +40,13 @@
   <head>
     <meta charset="utf-8" http-equiv="refresh" content = "60">
     <title>Home</title>
-    <link rel = "stylesheet" type = "text/css" href="homeAdmin.css">
-    <link rel = "stylesheet" type = "text/css" href="ticketsTable.css">
+    <link rel = "stylesheet" type = "text/css" href="css/homeAdmin.css">
+    <link rel = "stylesheet" type = "text/css" href="css/ticketsTable.css">
+    <link rel = "stylesheet" type = "text/css" href="css/modal.css">
 
     <script src= "http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src= "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script defer src= "homeAdmin.js"></script>
+    <script defer src= "js/homeAdmin.js"></script>
   </head>
   <body>
     <div class = "sidenav">
@@ -50,11 +55,13 @@
         <a href ="#addAcc" id = "add-account">Add Account</a>
         <a href = "logout.php">Log out</a>
       </div>
+      <div></div>
+      <div class="opts"> <a > <?php echo $_SESSION["user_name"]; ?> </a></div>
     </div>
     
     <div class="testClass">
     <table class = "ticketsTable" id ="ticketsTable">
-      <tr>
+      <tr>  
         <th>Ticket number</th>
         <th>Date</th>
         <th>From</th>
@@ -132,10 +139,3 @@
 
   </body>
 </html>
-
-<?php
-}else{
-  header("Location: index.php");
-  exit();
-}
-?>
