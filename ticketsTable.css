@@ -1,0 +1,20 @@
+.ticketsTable {
+  display: flex;
+}
+
+.ticketsTable tr {
+  width: 80%;
+  background-color: #eee;
+  border-top: 1px solid #fff;
+}
+
+.ticketsTable th {
+  background-color: #bfbfbf;
+  height: 70px;
+  width: 10%;
+}
+
+.ticketsTable tr:hover {
+  cursor: pointer;
+  background-color: #ccc;
+}
