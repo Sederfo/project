@@ -19,9 +19,14 @@
       $name = $_POST["name"];
       $role = $_POST["role"];
       if(checkIfUserExists($username) === true){
-        //add notification "user exists" and display the modal until the admin inputs a valid username
+        echo "
+        <script> 
+          document.getElementById('error').style.display='block';
+        </script>
+        muiemuiemuie
+        ";
       }else{
-        //add notification "account has been added"
+        echo "user added";
         addAccount($username, $name, $role);
         header("Location: homeAdmin.php");
         exit;
@@ -53,7 +58,7 @@
   <body>
     <div class = "topnav">
       <div class = "opts">
-        <a href = "#">Tickets</a>
+        <a href = "homeAdmin.php">Tickets</a>
         <a href ="#addAcc" id = "add-account-btn">Add Account</a>
         <a href = "logout.php">Log out</a>
       </div>
@@ -120,6 +125,8 @@
     <form action = "" method = "post" id ="addAccountForm">
       <div id="acc-modal-bg" class = "modal-bg" >
         <div id="acc-modal" class ="modal">
+          <p id="error" class = "error" style="display:none"> Error area </p>
+
           <label for = "Username">Username:</label>
           <input type ="text" name ="username" id ="usr" required>
           <label for ="Name">Name:</label>
@@ -130,7 +137,8 @@
             <option value = "Employee" id = "empRole">Employee</option>
             <option value ="User" id = "userRole">User</option>
           </select>
-          <input id = "acc-done-btn" type = "submit" class = "doneBtn" name = "accDoneBtn" value = "Done">
+          <input id = "acc-done-btn" type = "submit" class = "doneBtn" name = "accDoneBtn" value="Done">
+           
           <span id = "acc-modal-close" class = "modal-close">X</span>
         </div>
       </div>

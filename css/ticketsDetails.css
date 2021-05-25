@@ -75,7 +75,7 @@ h1 {
   display: block;
 }
 
-.deleteTicketButton {
+button {
   background: #555;
   padding: 10px 15px;
   color: #fff;
@@ -85,7 +85,7 @@ h1 {
   cursor: pointer;
 }
 
-.deleteTicketButton:hover {
+button:hover {
   margin: 10px;
   color: black;
   background: #bfbfbf;

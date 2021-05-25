@@ -18,7 +18,8 @@
 
     if(isset($_POST["rca"]) && isset($_POST["done"]) && !empty($_POST["rca"])){
         addSolvedTicket($_GET["id"], $_SESSION['user_name'], $_POST["rca"]);
-        header("Location: homeAdmin.php");
+
+        header("Location: goToHome.php");
         exit;
     }
 
@@ -46,7 +47,7 @@
 
   <div class = "topnav">
       <div class = "opts">
-        <a href = "homeAdmin.php" id="tickets-btn">Tickets</a>
+        <a href = "goToHome.php" id="tickets-btn">Tickets</a>
         
         <a href = "logout.php">Log out</a>
       </div>
@@ -96,8 +97,6 @@
 
     <form action = "" method = "post">
     <div id="container-solve" class="container-rca">
-        <!--<button type = "submit" id="solve-button" name = "solveButton"> Solve </button>-->
-
         <select name = "ticketPriority" id = "priority" class = "<?php echo $prt === "solved" || $currentTicket["status"] === "solved" ?  "rca-hidden" :  "rca-visible"; ?>">
           <option value = "pending" selected disabled>Choose status</option>
           <option value = "in progress" id = "in progress">In progress</option>
@@ -107,7 +106,7 @@
         if(count($rca) == 0){
         ?>
         <textarea rows="4" cols="150" name = "rca" style="resize: none" class = "<?php echo $prt === "solved" || $currentTicket["status"] === "solved" ?  "rca-visible":  "rca-hidden"; ?>"></textarea>
-        <input type = "submit" name = "done" value="Done" id = "done-button">
+        <button type = "submit" name = "done" value="Done" id = "done-button"> Done </button>
       <?php
      }else {
         ?>
@@ -121,35 +120,32 @@
       <button> Done </button>
     </div>
 
-    <div  >
-      <button id="delete-btn" class="deleteTicketButton"> Delete ticket </button>
-    </div>
-
-
+    <?php 
+      if ($currentTicket["status"] != "solved"){
+        echo "
+        <div>
+          <button id='delete-btn' class='deleteTicketButton'> Delete ticket </button>
+        </div>
+        
+        ";
+      }
+    ?>
+    
     <div id="delete-modal-bg" class = "modal-bg ">
       <div id="delete-modal" class = "modal">
-
         <p> Are you sure you want to delete Ticket <?php echo $_GET["id"] ?> ?
-
         <form action = "deleteTicketHandle.php" method = "post">
-        
           <input type="hidden" name="id" value=<?php echo $_GET["id"]?> >
-          <button class="deleteTicketButton" type = "submit" name = "deleteButton" value = "Delete" >
+          <button class="button" type = "submit" name = "deleteButton" value = "Delete" >
             Yes
           </button>
-
-          <button id="delete-modal-close-no-button" class="deleteTicketButton" type = "button" >
+          <button id="delete-modal-close-no-button" class="button" type = "button" >
             No
           </button>
-      
         </form>
-      
       <span id = "delete-modal-close" class = "modal-close">X</span>
       </div>
     </div>
-
   </div>
-  
-
   </body>
 </html>

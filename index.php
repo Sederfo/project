@@ -1,11 +1,17 @@
+<?php
+  session_start();
+  session_unset();
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title>Login</title>
     <link rel = "stylesheet" type = "text/css" href="css/login.css">
+    <link rel = "stylesheet" type = "text/css" href="css/page.css">
   </head>
-  <body>
+  <body style="background:black">
     <div class = "logInForm">
     <form action = "login.php" method="post">
 
