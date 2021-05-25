@@ -1,5 +1,15 @@
-.ticketsTable {
+.testClass {
+  position: absolute;
   display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  top: 100px;
+}
+
+.ticketsTable {
+  table-layout: fixed;
+  width: 80%;
 }
 
 .ticketsTable tr {
@@ -11,7 +21,13 @@
 .ticketsTable th {
   background-color: #bfbfbf;
   height: 70px;
-  width: 10%;
+
+  cursor: default;
+}
+
+.ticketsTable td {
+  padding: 3px 5px;
+  text-align: center;
 }
 
 .ticketsTable tr:hover {

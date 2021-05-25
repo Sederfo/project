@@ -1,5 +1,5 @@
 // variables for add ticket modal
-var modalBtn = document.querySelector(".modal-btn");
+var modalBtn = document.getElementById("addTicketButton");
 var modalBg = document.querySelector(".modal-bg");
 var modalClose = document.querySelector(".modal-close");
 var modalDone = document.querySelector(".doneBtn");
