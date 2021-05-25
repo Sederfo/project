@@ -24,11 +24,10 @@
 
     $rca = getRCA($_GET["id"]);
 
-    if(isset($_POST["deleteButton"])){
-      echo "<script>confirm('Delete ticket?');
-      window.location = 'homeAdmin.php';</script>";
-      deleteTicket($_GET["id"]);
-    }
+  }else{
+    header("Location: index.php");
+    exit();
+  }
  ?>
 
 <!DOCTYPE html>
@@ -37,16 +36,22 @@
     <meta charset="utf-8">
     <title>Ticket Details</title>
     <link rel = "stylesheet" type = "text/css" href="css/ticketsDetails.css">
-    <script src="ticketsDetails.js" defer> </script>
+    <link rel = "stylesheet" type = "text/css" href="css/modal.css">
+    <link rel = "stylesheet" type = "text/css" href="css/topnav.css">
+    <link rel = "stylesheet" type = "text/css" href="css/page.css">
+
+    <script defer src="js/ticketsDetails.js" defer> </script>
   </head>
   <body>
 
-    <div class = "sidenav">
+  <div class = "topnav">
       <div class = "opts">
-        <a href = "homeAdmin.php">Tickets</a>
-        <a id = "add-account">Add Account</a>
+        <a href = "homeAdmin.php" id="tickets-btn">Tickets</a>
+        
         <a href = "logout.php">Log out</a>
       </div>
+      <div></div>
+      <div class="opts"> <a > <?php echo $_SESSION["user_name"]; ?> </a></div>
     </div>
 
     <?php
@@ -116,21 +121,35 @@
       <button> Done </button>
     </div>
 
-  <form action = "" method = "post">
-    <div class ="delete-button">
-      <input type = "submit" name = "deleteButton" value = "Delete">
+    <div  >
+      <button id="delete-btn" class="deleteTicketButton"> Delete ticket </button>
     </div>
-  </form>
-  </div>
 
+
+    <div id="delete-modal-bg" class = "modal-bg ">
+      <div id="delete-modal" class = "modal">
+
+        <p> Are you sure you want to delete Ticket <?php echo $_GET["id"] ?> ?
+
+        <form action = "deleteTicketHandle.php" method = "post">
+        
+          <input type="hidden" name="id" value=<?php echo $_GET["id"]?> >
+          <button class="deleteTicketButton" type = "submit" name = "deleteButton" value = "Delete" >
+            Yes
+          </button>
+
+          <button id="delete-modal-close-no-button" class="deleteTicketButton" type = "button" >
+            No
+          </button>
+      
+        </form>
+      
+      <span id = "delete-modal-close" class = "modal-close">X</span>
+      </div>
+    </div>
+
+  </div>
+  
 
   </body>
 </html>
-
-<?php
-}else{
-  header("Location: index.php");
-  exit();
-}
-
- ?>

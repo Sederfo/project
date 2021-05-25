@@ -43,16 +43,18 @@
     <link rel = "stylesheet" type = "text/css" href="css/homeAdmin.css">
     <link rel = "stylesheet" type = "text/css" href="css/ticketsTable.css">
     <link rel = "stylesheet" type = "text/css" href="css/modal.css">
+    <link rel = "stylesheet" type = "text/css" href="css/topnav.css">
+    <link rel = "stylesheet" type = "text/css" href="css/page.css">
 
     <script src= "http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src= "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script defer src= "js/homeAdmin.js"></script>
   </head>
   <body>
-    <div class = "sidenav">
+    <div class = "topnav">
       <div class = "opts">
         <a href = "#">Tickets</a>
-        <a href ="#addAcc" id = "add-account">Add Account</a>
+        <a href ="#addAcc" id = "add-account-btn">Add Account</a>
         <a href = "logout.php">Log out</a>
       </div>
       <div></div>
@@ -89,49 +91,51 @@
        ?>
     </table>
     <div class="addTicketDiv">
-      <button id="addTicketButton" class ="addTicketButton" >Add Ticket</button>
+      <button id="add-ticket-btn" class ="addTicketButton" >Add Ticket</button>
     </div>
       
     </div>
 
     <form action = "" method = "post" id ="addTicketForm">
-      <div class = "modal-bg">
-        <div class = "modal">
-          <label for="Subject">Subject</label>
+      <div id="ticket-modal-bg" class = "modal-bg">
+        <div id="ticket-modal" class = "modal">
+          <label for="Subject">Subject:</label>
           <input type = "text" name = "subject" form = "addTicketForm" id = "sbj" required>
-          <label for ="Description">Description</label>
+          <label for ="Description">Description:</label>
           <textarea id = "dsc" name = "description" required></textarea>
-          <label for ="Priority">Priority</label>
+          <label for ="Priority">Priority:</label>
           <select name = "priority" id = "priority" form = "addTicketForm" required>
-            <option value ="" disabled selected>Select priority</option>
+            <option value ="" disabled selected>Select priority:</option>
             <option value ="low" id = "lowpr">Low</option>
             <option value ="medium" id = "mediumpr">Medium</option>
             <option value ="high" id = "highpr">High</option>
             <option value ="critical" id = "criticalpr">Critical</option>
           </select>
-          <input type = "submit" class = "doneBtn" name = "doneBtn" value = "Done">
-          <span class ="modal-close">X</span>
+          <input id = "ticket-done-btn" type = "submit" class = "doneBtn" name = "doneBtn" value = "Done">
+          <span id = "ticket-modal-close" class ="modal-close">X</span>
         </div>
       </div>
     </form>
 
     <form action = "" method = "post" id ="addAccountForm">
-      <div class = "acc-modal-bg">
-        <div class ="acc-modal">
-          <label for = "Username">Username</label>
+      <div id="acc-modal-bg" class = "modal-bg" >
+        <div id="acc-modal" class ="modal">
+          <label for = "Username">Username:</label>
           <input type ="text" name ="username" id ="usr" required>
-          <label for ="Name">Name</label>
+          <label for ="Name">Name:</label>
           <input type = "text" name = "name" id = "name" required>
+          <label for ="role">Role:</label>
           <select name = "role" id = "role" required>
             <option value = "" disabled selected>Select role</option>
             <option value = "Employee" id = "empRole">Employee</option>
             <option value ="User" id = "userRole">User</option>
           </select>
-          <input type = "submit" class = "accDoneBtn" name = "accDoneBtn" value = "Done">
-          <span class = "acc-modal-close">X</span>
+          <input id = "acc-done-btn" type = "submit" class = "doneBtn" name = "accDoneBtn" value = "Done">
+          <span id = "acc-modal-close" class = "modal-close">X</span>
         </div>
       </div>
     </form>
+
     <div class = "notification">
 
     </div>

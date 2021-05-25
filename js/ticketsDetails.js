@@ -7,3 +7,22 @@ containerRCA = document.getElementById("container-rca");
 //   containerSolve.style.display = "none";
 //   containerRCA.style.display = "flex";
 // });
+
+deleteButton = document.getElementById("delete-btn");
+deleteModalBg = document.getElementById("delete-modal-bg");
+deleteModalClose = document.getElementById("delete-modal-close");
+deleteModalCloseButton = document.getElementById(
+  "delete-modal-close-no-button"
+);
+
+deleteButton.addEventListener("click", () => {
+  deleteModalBg.classList.add("bg-active");
+});
+
+deleteModalClose.addEventListener("click", () => {
+  deleteModalBg.classList.remove("bg-active");
+});
+
+deleteModalCloseButton.addEventListener("click", () => {
+  deleteModalBg.classList.remove("bg-active");
+});

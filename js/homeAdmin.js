@@ -1,21 +1,21 @@
 // variables for add ticket modal
-var modalBtn = document.getElementById("addTicketButton");
-var modalBg = document.querySelector(".modal-bg");
-var modalClose = document.querySelector(".modal-close");
-var modalDone = document.querySelector(".doneBtn");
+var modalBtn = document.getElementById("add-ticket-btn");
+var modalBg = document.getElementById("ticket-modal-bg");
+var modalClose = document.getElementById("ticket-modal-close");
+var modalDone = document.getElementById("ticket-done-btn");
 
 //variables for add account modal
-var addAccount = document.getElementById("add-account");
-var accModalBg = document.querySelector(".acc-modal-bg");
-var accModalClose = document.querySelector(".acc-modal-close");
-var accModalDone = document.querySelector(".accDoneBtn");
+var addAccount = document.getElementById("add-account-btn");
+var accModalBg = document.getElementById("acc-modal-bg");
+var accModalClose = document.getElementById("acc-modal-close");
+var accModalDone = document.getElementById("acc-done-btn");
 
 addAccount.addEventListener("click", () => {
-  accModalBg.classList.add("acc-bg-active");
+  accModalBg.classList.add("bg-active");
 });
 
 accModalClose.addEventListener("click", () => {
-  accModalBg.classList.remove("acc-bg-active");
+  accModalBg.classList.remove("bg-active");
 });
 
 accModalDone.addEventListener("submit", (e) => {
@@ -33,14 +33,11 @@ modalClose.addEventListener("click", () => {
 
 modalDone.addEventListener("submit", (e) => {
   e.preventDefault();
-  var subject = document.getElementById("sbj").value;
-  var description = document.getElementById("dsc").value;
-  var priority = document.getElementById("priority").value;
-
   modalBg.classList.remove("bg-active");
   window.location.reload();
 });
 
+//color rows
 document.addEventListener("DOMContentLoaded", () => {
   const rows = document.querySelectorAll("tr[data-href]");
   rows.forEach((row) => {
