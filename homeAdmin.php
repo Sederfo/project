@@ -43,7 +43,7 @@
 
 
   <head>
-    <meta charset="utf-8" http-equiv="refresh" content = "60">
+    <meta charset="utf-8">
     <title>Home</title>
     <link rel = "stylesheet" type = "text/css" href="css/homeAdmin.css">
     <link rel = "stylesheet" type = "text/css" href="css/ticketsTable.css">
