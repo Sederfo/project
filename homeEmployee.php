@@ -33,13 +33,14 @@
   <body>
     <div class = "topnav">
       <div class = "opts">
+        <img src="img/tm_logo.png" style="height: 48px;">
         <a href = "homeEmployee.php">Tickets</a>
         <a href = "logout.php">Log out</a>
       </div>
       <div>
-        <img src="img/tm_logo.png" style="height: 48px;">
+        
       </div>
-      <div class="opts"> <a > <?php echo $_SESSION["user_name"]; ?> </a></div>
+      <div class="opts"> <a >Welcome <?php echo $_SESSION["user_name"]; ?> </a></div>
     </div>
     
     <div class="testClass">

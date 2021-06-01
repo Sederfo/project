@@ -96,33 +96,37 @@
       <p><?php echo $currentTicket["description"];?> </p>
     </div>
 
-    <form action = "" method = "post">
-    <div id="container-solve" class="container-rca">
-        <select name = "ticketPriority" id = "priority" class = "<?php echo $prt === "solved" || $currentTicket["status"] === "solved" ?  "rca-hidden" :  "rca-visible"; ?>">
-          <option value = "pending" selected disabled>Choose status</option>
-          <option value = "in progress" id = "in progress">In progress</option>
-          <option value = "solved" id = "solved">Solved</option>
+    
+    <form action = '' method = 'post'>
+    <div id='container-solve' class='container-rca' <?php if ($_SESSION['role']=='user') echo "style='display: none'" ?>>
+        <select name = 'ticketPriority' id = 'priority' class = '<?php echo $prt === 'solved' || $currentTicket['status'] === 'solved' ?  'rca-hidden' :  'rca-visible'; ?>'>
+          <option value = 'pending' selected disabled>Choose status</option>
+          <option value = 'in progress' id = 'in progress'>In progress</option>
+          <option value = 'solved' id = 'solved'>Solved</option>
         </select>
         <?php
         if(count($rca) == 0){
         ?>
-        <textarea rows="4" cols="150" name = "rca" style="resize: none" class = "<?php echo $prt === "solved" || $currentTicket["status"] === "solved" ?  "rca-visible":  "rca-hidden"; ?>"></textarea>
-        <button type = "submit" name = "done" value="Done" id = "done-button"> Done </button>
+        <textarea rows='4' cols='150' name = 'rca' style='resize: none' class = '<?php echo $prt === 'solved' || $currentTicket['status'] === 'solved' ?  'rca-visible':  'rca-hidden'; ?>'></textarea>
+        <button type = 'submit' name = 'done' value='Done' id = 'done-button'> Done </button>
       <?php
      }else {
         ?>
-        <p><?php echo $rca[0]["RCA"];?></p>
+        <p><?php echo $rca[0]['RCA'];?></p>
         <?php }?>
     </div>
     </form>
 
-    <div id="container-rca" class="container-rca" style="display:none">
-      <textarea rows="4" cols="150" style="resize: none"> </textarea>
+    <div id='container-rca' class='container-rca' style='display:none'>
+      <textarea rows='4' cols='150' style='resize: none'> </textarea>
       <button> Done </button>
     </div>
+    
+    
 
     <?php 
-      if ($currentTicket["status"] != "solved"){
+      //only show delete button for admin and if ticket is not solved
+      if ($currentTicket["status"] != "solved" && $_SESSION["role"]=="admin"){
         echo "
         <div>
           <button id='delete-btn' class='deleteTicketButton'> Delete ticket </button>

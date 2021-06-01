@@ -4,5 +4,5 @@
     $deleteQuery->bind_param("i", $_POST["id"]);
     $deleteQuery->execute();
     $deleteQuery->close();
-    header("Location: homeAdmin.php");
+    header("Location: goToHome.php");
 ?>

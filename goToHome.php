@@ -5,7 +5,9 @@
     if ($_SESSION["role"] == "admin")
         header("Location: homeAdmin.php");
         
-    else
+    else if ($_SESSION["role"] == "employee")
         header("Location: homeEmployee.php");
+    else 
+    header("Location: homeUser.php");
         
 ?>

@@ -6,32 +6,13 @@
   ini_set('display_errors', 1);
   if(isset($_SESSION['id']) && isset($_SESSION['user_name']) && isset($_SESSION['role'])){
     if(isset($_POST["doneBtn"])) {
-      $subject = $_POST["subject"];
-      $description = $_POST["description"];
-      $priority = $_POST["priority"];
-      addTicket($subject, $description, $priority);
-      header("Location: goToHome.php");
-      exit;
-    }
-
-    if(isset($_POST["accDoneBtn"])){
-      $username = $_POST["username"];
-      $name = $_POST["name"];
-      $role = $_POST["role"];
-      if(checkIfUserExists($username) === true){
-        echo "
-        <script> 
-          document.getElementById('error').style.display='block';
-        </script>
-        muiemuiemuie
-        ";
-      }else{
-        echo "user added";
-        addAccount($username, $name, $role);
-        header("Location: homeAdmin.php");
+        $subject = $_POST["subject"];
+        $description = $_POST["description"];
+        $priority = $_POST["priority"];
+        addTicket($subject, $description, $priority);
+        header("Location: goToHome.php");
         exit;
       }
-    }
   }else{
     header("Location: index.php");
     exit();
@@ -54,18 +35,19 @@
 
     <script src= "http://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src= "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script defer src= "js/homeAdmin.js"></script>
+    <script defer src= "js/homeUser.js"></script>
   </head>
   <body>
     <div class = "topnav">
       <div class = "opts">
         <img src="img/tm_logo.png" style="height: 48px;">
-        <a href = "homeAdmin.php">Tickets</a>
-        <a href ="#addAcc" id = "add-account-btn">Add Account</a>
+        <a href = "homeUser.php">Tickets</a>
         <a href = "logout.php">Log out</a>
       </div>
-      <div></div>
-      <div class="opts"> <a >Welcome, <?php echo $_SESSION["user_name"]; ?> </a></div>
+      <div>
+        
+      </div>
+      <div class="opts"> <a > Welcome, <?php echo $_SESSION["user_name"]; ?> </a></div>
     </div>
     
     <div class="testClass">
@@ -123,33 +105,8 @@
         </div>
       </div>
     </form>
-
-    <form action = "" method = "post" id ="addAccountForm">
-      <div id="acc-modal-bg" class = "modal-bg" >
-        <div id="acc-modal" class ="modal">
-          <p id="error" class = "error" style="display:none"> Error area </p>
-
-          <label for = "Username">Username:</label>
-          <input type ="text" name ="username" id ="usr" required>
-          <label for ="Name">Name:</label>
-          <input type = "text" name = "name" id = "name" required>
-          <label for ="role">Role:</label>
-          <select name = "role" id = "role" required>
-            <option value = "" disabled selected>Select role</option>
-            <option value = "Employee" id = "empRole">Employee</option>
-            <option value ="User" id = "userRole">User</option>
-          </select>
-          <input id = "acc-done-btn" type = "submit" class = "doneBtn" name = "accDoneBtn" value="Done">
-           
-          <span id = "acc-modal-close" class = "modal-close">X</span>
-        </div>
-      </div>
-    </form>
-
-    <div class = "notification">
-
+  
+      
     </div>
-    
-
   </body>
 </html>
