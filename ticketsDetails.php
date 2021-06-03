@@ -53,7 +53,7 @@
         <a href = "logout.php">Log out</a>
       </div>
       <div></div>
-      <div class="opts"> <a > <?php echo $_SESSION["user_name"]; ?> </a></div>
+      <div class="opts"> <a >Welcome, <?php echo $_SESSION["user_name"]; ?> </a></div>
     </div>
 
     <?php
