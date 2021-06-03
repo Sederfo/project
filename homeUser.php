@@ -24,7 +24,7 @@
 
 
   <head>
-    <meta charset="utf-8" http-equiv="refresh" content = "60">
+    <meta charset="utf-8">
     <title>Home</title>
     <link rel = "stylesheet" type = "text/css" href="css/homeAdmin.css">
     <link rel = "stylesheet" type = "text/css" href="css/ticketsTable.css">
@@ -45,14 +45,14 @@
         <a href = "logout.php">Log out</a>
       </div>
       <div>
-        
+
       </div>
       <div class="opts"> <a > Welcome, <?php echo $_SESSION["user_name"]; ?> </a></div>
     </div>
-    
+
     <div class="testClass">
     <table class = "ticketsTable" id ="ticketsTable">
-      <tr>  
+      <tr>
         <th>Ticket number</th>
         <th>Date</th>
         <th>From</th>
@@ -82,7 +82,7 @@
     <div class="addTicketDiv">
       <button id="add-ticket-btn" class ="addTicketButton" >Add Ticket</button>
     </div>
-      
+
     </div>
 
     <form action = "" method = "post" id ="addTicketForm">
@@ -105,8 +105,8 @@
         </div>
       </div>
     </form>
-  
-      
+
+
     </div>
   </body>
 </html>
